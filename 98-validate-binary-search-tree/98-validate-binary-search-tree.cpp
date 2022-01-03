@@ -11,21 +11,26 @@
  */
 class Solution {
 public:
-    vector<int> v;
-    void inorderTraversal(TreeNode* root)
-    {
-        if(root==NULL)return;
-        inorderTraversal(root->left);
-        v.push_back(root->val);
-        inorderTraversal(root->right);
-    }
     bool isValidBST(TreeNode* root) {
-        if(!root) return true;
-        inorderTraversal(root);
-        for(int i=1;i<v.size();i++)
-        {
-            if(v[i]<=v[i-1])
+        stack<TreeNode*> stk;
+        TreeNode* prev = nullptr;
+
+        while (!stk.empty() || root != nullptr) {
+            while (root != nullptr) {
+                stk.push(root);
+                root = root->left;
+            }
+            root = stk.top();
+            stk.pop();
+
+            // If next element in inorder traversal
+            // is smaller than the previous one
+            // that's not BST.
+            if (prev != nullptr and root->val <= prev->val) {
                 return false;
+            }
+            prev = root;
+            root = root->right;
         }
         return true;
     }
