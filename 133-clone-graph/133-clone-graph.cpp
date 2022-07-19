@@ -20,9 +20,11 @@ public:
 */
 
 class Solution {
-private:
+
+    /*
+    private:
     unordered_map<Node*, Node*> visited;
-public:
+
     Node* cloneGraph(Node* node) {
         if(node == NULL)
             return node;
@@ -39,6 +41,8 @@ public:
         
     }
 };
+
+
 /*Steps for BFS are almost same. Most of the things are relatable if you have studied trees level order traversal.
 
 So instead of the stack here, we use queue to process the nodes and their neighbours.
@@ -50,8 +54,8 @@ push the neighbour into queue. This is to process the children of the neighbours
 We fill the neigbours vector/list in the same way.
 BFS Solution*/
 
-/*
 
+public:
 Node* cloneGraph(Node* node){
         if(node == NULL)
             return node;
@@ -73,4 +77,5 @@ Node* cloneGraph(Node* node){
         }
         return visited[node];
 
-    }*/
+    }
+};
