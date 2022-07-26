@@ -14,8 +14,10 @@ public:
             int iMax = max(max((topMax * nums[i]), (topMin * nums[i])), nums[i]);
             int iMin = min(min((topMax * nums[i]), (topMin * nums[i])), nums[i]);
             
-            topMax = iMax;
-            topMin = iMin;
+            
+             topMax=iMax;
+             topMin = iMin;
+           
             
             result = max(result, topMax);
         }
