@@ -1,54 +1,51 @@
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        
-        if(list1==nullptr){
+       
+	    // if list1 happen to be NULL
+		// we will simply return list2.
+        if(list1 == NULL)
             return list2;
-        }
-        if(list2==nullptr){
+		
+		// if list2 happen to be NULL
+		// we will simply return list1.
+        if(list2 == NULL)
             return list1;
+        
+        ListNode * ptr = list1;
+        if(list1 -> val > list2 -> val)
+        {
+            ptr = list2;
+            list2 = list2 -> next;
         }
-        if(list1==nullptr && list2==nullptr){
-            return NULL;
+        else
+        {
+            list1 = list1 -> next;
         }
+        ListNode *curr = ptr;
         
-        ListNode*dummy=new ListNode();
-        ListNode*temp=dummy;
-        
-        
-        while(list1!=NULL && list2!=NULL){
-            
-            if(list1->val >= list2->val){
-                ListNode*node=new ListNode(list2->val);
-                temp->next=node;
-                temp=temp->next;
-                
-                list2=list2->next;
+		// till one of the list doesn't reaches NULL
+        while(list1 &&  list2)
+        {
+            if(list1 -> val < list2 -> val){
+                curr->next = list1;
+                list1 = list1 -> next;
             }
-            
             else{
-                ListNode*node=new ListNode(list1->val);
-                temp->next=node;
-                temp=temp->next;
-                
-                list1=list1->next;
+                curr->next = list2;
+                list2 = list2 -> next;
             }
-        }
-        
-        while(list1!=NULL){
-             ListNode*node=new ListNode(list1->val);
-                temp->next=node;
-                temp=temp->next;
+            curr = curr -> next;
                 
-                list1=list1->next;
         }
-        while(list2!=NULL){
-            ListNode*node=new ListNode(list2->val);
-                temp->next=node;
-                temp=temp->next;
-                
-                list2=list2->next;
-        }
-        return dummy->next;
+		
+		// adding remaining elements of bigger list.
+        if(!list1)
+            curr -> next = list2;
+        else
+            curr -> next = list1;
+            
+        return ptr;
+       
     }
 };
